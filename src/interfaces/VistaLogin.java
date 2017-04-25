@@ -1,5 +1,6 @@
 package interfaces;
 
+import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -22,12 +23,13 @@ public class VistaLogin {
 		JFrame ventana = new JFrame("Mi GUI");
 		// obtener contenedor, asignar layout
 		Container contenedor = ventana.getContentPane();
-		contenedor.setLayout(new FlowLayout());
-		// crear componentes
-		JButton boton = new JButton("Entrar");
+		contenedor.setLayout(new BorderLayout());
 		
-		JTextField niaField = new JTextField("<nia>", 10);
-		JPasswordField passField = new JPasswordField("<password>",10);
+		JButton entrar = new JButton("Entrar");
+		JButton salir = new JButton("Salir");
+		
+		JTextField niaField = new JTextField(10);
+		JPasswordField passField = new JPasswordField(10);
 		
 		SpringLayout layout = new SpringLayout();
 		String nia =niaField.getText();
@@ -51,26 +53,40 @@ public class VistaLogin {
 		// El norte de label2 estará a 5 pixels del borde inferior (SOUTH) de label
 		layout.putConstraint(SpringLayout.NORTH, label2, 8, SpringLayout.SOUTH, label);
 		// La izquierda de field2 alienada con la izquierda de field
-		layout.putConstraint(SpringLayout.WEST, passField, 0, SpringLayout.WEST, passField);
+		layout.putConstraint(SpringLayout.WEST, passField, 0, SpringLayout.WEST, niaField);
 		// El norte de field2, 5 pixels más abajo de field
-		layout.putConstraint(SpringLayout.NORTH, passField, 5, SpringLayout.SOUTH, passField);
+		layout.putConstraint(SpringLayout.NORTH, passField, 5, SpringLayout.SOUTH, niaField);
 
 		NiaPasswordField.add(label); 
 		NiaPasswordField.add(niaField);
 		NiaPasswordField.add(label2);
 		NiaPasswordField.add(passField);
-		NiaPasswordField.add(boton);
-		NiaPasswordField.setPreferredSize(new Dimension(250,50));
+
 		NiaPasswordField.setVisible(true);
+		
+		JPanel BotonField = new JPanel();
+		
+		BotonField.setLayout(new FlowLayout());
+		BotonField.add(entrar);
+		BotonField.add(salir);
+		
+		
 		// asociar acciones a componentes
-		boton.addActionListener(new ActionListener() {
+		entrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, niaField.getText());
 			}
 		});
+		
+		salir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				return;
+			}
+		});
 		// añadir componentes al contenedor
-		contenedor.add(NiaPasswordField);
-		contenedor.add(boton);
+		contenedor.add(BotonField,BorderLayout.SOUTH);
+		contenedor.add(NiaPasswordField,BorderLayout.CENTER);
+		
 		// mostrar ventana
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ventana.setSize(500, 500);
