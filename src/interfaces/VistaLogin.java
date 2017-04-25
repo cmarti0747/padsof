@@ -5,7 +5,11 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -20,36 +24,49 @@ import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 
 public class VistaLogin {
-	public static void main(String[] args) {
+	private JFrame ventana;
+	private Container contenedor;
+	private JButton entrar,salir;
+	private JLabel nia,pass,icon,icono,academia;
+	private JTextField niaField;
+	private JPasswordField passField;
+	private SpringLayout layout;
+	private JPanel NiaPasswordField,ExitField;
+	char[] password;
+	
+	public VistaLogin() {
 		// crear ventana
-		JFrame ventana = new JFrame("Mi GUI");
+		ventana = new JFrame("Mi GUI");
 		// obtener contenedor, asignar layout
-		Container contenedor = ventana.getContentPane();
+		contenedor = ventana.getContentPane();
 		contenedor.setLayout(new BorderLayout());
 		
-		JButton entrar = new JButton("Entrar");
-		JButton salir = new JButton("Salir");
+		entrar = new JButton("Entrar");
+		salir = new JButton("Salir");
 		
-		JTextField niaField = new JTextField(10);
-		JPasswordField passField = new JPasswordField(10);
+		niaField = new JTextField(10);
+		passField = new JPasswordField(10);
 		
-		SpringLayout layout = new SpringLayout();
+		layout = new SpringLayout();
 		
-		char[] password = passField.getPassword();
+		password = passField.getPassword();
 		
-		JLabel nia = new JLabel("NIA:");
-		JLabel pass = new JLabel("PASSWORD:");
+		nia = new JLabel("NIA:");
+		nia.setFont(new Font("Arial",0,25));
+		pass = new JLabel("PASSWORD:");
+		pass.setFont(new Font("Arial",0,25));
 		
-		JLabel icon = new JLabel("");
-		icon.setIcon(new ImageIcon("src/imagenes/footer-logo.png"));
-		JPanel NiaPasswordField = new JPanel();
+		icon = new JLabel("");
+		icon.setIcon(new ImageIcon("src/imagenes/user.png"));
+		
+		NiaPasswordField = new JPanel();
 		NiaPasswordField.setLayout(layout);
 		
 		layout.putConstraint("HorizontalCenter", nia, -100, "HorizontalCenter", NiaPasswordField);
 		layout.putConstraint("VerticalCenter", nia, 0, "VerticalCenter", NiaPasswordField);
 		
 		// La izquierda de field estará a 5 pixels desde el borde derecho (EAST) de label
-		layout.putConstraint(SpringLayout.WEST, niaField, 5, SpringLayout.EAST, nia);
+		layout.putConstraint(SpringLayout.WEST, niaField, 117, SpringLayout.EAST, nia);
 		// El norte de field estará a 5 pixels desde el norte del contenedor
 		layout.putConstraint(SpringLayout.NORTH, niaField, 0, SpringLayout.NORTH, nia);
 		
@@ -62,28 +79,49 @@ public class VistaLogin {
 		layout.putConstraint(SpringLayout.WEST, passField, 0, SpringLayout.WEST, niaField);
 		
 		// El norte de field2, 5 pixels más abajo de field
-		layout.putConstraint(SpringLayout.NORTH, passField, 5, SpringLayout.SOUTH, niaField);
+		layout.putConstraint(SpringLayout.NORTH, passField, 21, SpringLayout.SOUTH, niaField);
 		
 		// El norte de field2, 5 pixels más abajo de field
-		layout.putConstraint(SpringLayout.WEST, passField, 5, SpringLayout.EAST, pass);
+		layout.putConstraint(SpringLayout.WEST, passField, 10, SpringLayout.EAST, pass);
 		
 		// La izquierda de field estará a 5 pixels desde el borde derecho (EAST) de label
-		layout.putConstraint(SpringLayout.EAST, icon, -250, SpringLayout.WEST, nia);
-				
+		layout.putConstraint(SpringLayout.EAST, icon, -150, SpringLayout.WEST, nia);
+		// La izquierda de field estará a 5 pixels desde el borde derecho (EAST) de label
+		layout.putConstraint(SpringLayout.SOUTH, icon, 100, SpringLayout.NORTH, nia);
+		
+		// La izquierda de field estará a 5 pixels desde el borde derecho (EAST) de label
+		layout.putConstraint(SpringLayout.NORTH, entrar, 50, SpringLayout.SOUTH, passField);
+		// La izquierda de field estará a 5 pixels desde el borde derecho (EAST) de label
+		layout.putConstraint(SpringLayout.WEST, entrar, 75, SpringLayout.WEST, pass);
+		
+		// La izquierda de field estará a 5 pixels desde el borde derecho (EAST) de label
+		layout.putConstraint(SpringLayout.NORTH, salir, 50, SpringLayout.SOUTH, passField);
+				// La izquierda de field estará a 5 pixels desde el borde derecho (EAST) de label
+		layout.putConstraint(SpringLayout.WEST, salir, 10, SpringLayout.EAST, entrar);
+		
 		NiaPasswordField.add(icon); 
 		NiaPasswordField.add(nia); 
 		NiaPasswordField.add(niaField);
 		NiaPasswordField.add(pass);
 		NiaPasswordField.add(passField);
+		NiaPasswordField.add(entrar);
+		NiaPasswordField.add(salir);
 		NiaPasswordField.setPreferredSize(new Dimension(500,500));
 		NiaPasswordField.setVisible(true);
-		NiaPasswordField.setBackground(new Color(153,255,153));
-		JPanel BotonField = new JPanel();
+		NiaPasswordField.setBackground(new Color(0,255,255));
 		
-		BotonField.setLayout(new FlowLayout());
-		BotonField.add(entrar);
-		BotonField.add(salir);
 		
+		ExitField = new JPanel();
+		ExitField.setLayout(new BorderLayout());
+		icono = new JLabel();
+		academia= new JLabel("Academia Lopez");
+		academia.setFont(new Font("Arial",Font.PLAIN,90));
+		icono.setIcon(new ImageIcon("src/imagenes/descarga.png"));
+		ExitField.setBackground(new Color(255,255,255));
+		ExitField.add(icono,BorderLayout.WEST);
+		ExitField.add(academia,BorderLayout.CENTER);
+		
+	
 		
 		// asociar acciones a componentes
 		entrar.addActionListener(new ActionListener() {
@@ -98,12 +136,12 @@ public class VistaLogin {
 			}
 		});
 		// añadir componentes al contenedor
-		contenedor.add(BotonField,BorderLayout.SOUTH);
+		contenedor.add(ExitField,BorderLayout.NORTH);
 		contenedor.add(NiaPasswordField,BorderLayout.CENTER);
 		
 		// mostrar ventana
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		ventana.setSize(500, 500);
+		ventana.setSize(1020, 850);
 		ventana.setVisible(true);
 	}
 }
