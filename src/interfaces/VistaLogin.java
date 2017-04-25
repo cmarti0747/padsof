@@ -1,6 +1,7 @@
 package interfaces;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -8,6 +9,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -32,38 +34,50 @@ public class VistaLogin {
 		JPasswordField passField = new JPasswordField(10);
 		
 		SpringLayout layout = new SpringLayout();
-		String nia =niaField.getText();
+		
 		char[] password = passField.getPassword();
 		
-		JLabel label = new JLabel("NIA:");
-		JLabel label2 = new JLabel("PASSWORD:");
-
+		JLabel nia = new JLabel("NIA:");
+		JLabel pass = new JLabel("PASSWORD:");
+		
+		JLabel icon = new JLabel("");
+		icon.setIcon(new ImageIcon("src/imagenes/footer-logo.png"));
 		JPanel NiaPasswordField = new JPanel();
 		NiaPasswordField.setLayout(layout);
-		// La izquierda (WEST) de label estará a 5 pixels de la izquierda del contenedor 
-		layout.putConstraint(SpringLayout.WEST, label, 5, SpringLayout.WEST, NiaPasswordField);
-		// El norte (NORTH) de label estará a 5 pixels del norte del contenedor 
-		layout.putConstraint(SpringLayout.NORTH, label, 5, SpringLayout.NORTH, NiaPasswordField);
+		
+		layout.putConstraint("HorizontalCenter", nia, -100, "HorizontalCenter", NiaPasswordField);
+		layout.putConstraint("VerticalCenter", nia, 0, "VerticalCenter", NiaPasswordField);
+		
 		// La izquierda de field estará a 5 pixels desde el borde derecho (EAST) de label
-		layout.putConstraint(SpringLayout.WEST, niaField, 5, SpringLayout.EAST, label);
+		layout.putConstraint(SpringLayout.WEST, niaField, 5, SpringLayout.EAST, nia);
 		// El norte de field estará a 5 pixels desde el norte del contenedor
-		layout.putConstraint(SpringLayout.NORTH, niaField, 5, SpringLayout.NORTH, NiaPasswordField);
+		layout.putConstraint(SpringLayout.NORTH, niaField, 0, SpringLayout.NORTH, nia);
+		
 		// La izquierda de label2 estará a 0 pixels (alineada) del borde izquierdo de label
-		layout.putConstraint(SpringLayout.WEST, label2, 0, SpringLayout.WEST, label);
+		layout.putConstraint(SpringLayout.WEST, pass, 0, SpringLayout.WEST, nia);
+		
 		// El norte de label2 estará a 5 pixels del borde inferior (SOUTH) de label
-		layout.putConstraint(SpringLayout.NORTH, label2, 8, SpringLayout.SOUTH, label);
+		layout.putConstraint(SpringLayout.NORTH, pass, 8, SpringLayout.SOUTH, nia);
 		// La izquierda de field2 alienada con la izquierda de field
 		layout.putConstraint(SpringLayout.WEST, passField, 0, SpringLayout.WEST, niaField);
+		
 		// El norte de field2, 5 pixels más abajo de field
 		layout.putConstraint(SpringLayout.NORTH, passField, 5, SpringLayout.SOUTH, niaField);
-
-		NiaPasswordField.add(label); 
-		NiaPasswordField.add(niaField);
-		NiaPasswordField.add(label2);
-		NiaPasswordField.add(passField);
-
-		NiaPasswordField.setVisible(true);
 		
+		// El norte de field2, 5 pixels más abajo de field
+		layout.putConstraint(SpringLayout.WEST, passField, 5, SpringLayout.EAST, pass);
+		
+		// La izquierda de field estará a 5 pixels desde el borde derecho (EAST) de label
+		layout.putConstraint(SpringLayout.EAST, icon, -250, SpringLayout.WEST, nia);
+				
+		NiaPasswordField.add(icon); 
+		NiaPasswordField.add(nia); 
+		NiaPasswordField.add(niaField);
+		NiaPasswordField.add(pass);
+		NiaPasswordField.add(passField);
+		NiaPasswordField.setPreferredSize(new Dimension(500,500));
+		NiaPasswordField.setVisible(true);
+		NiaPasswordField.setBackground(new Color(153,255,153));
 		JPanel BotonField = new JPanel();
 		
 		BotonField.setLayout(new FlowLayout());
@@ -80,7 +94,7 @@ public class VistaLogin {
 		
 		salir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				return;
+				System.exit(0);
 			}
 		});
 		// añadir componentes al contenedor
