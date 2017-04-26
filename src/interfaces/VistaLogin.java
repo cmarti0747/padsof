@@ -134,6 +134,9 @@ public class VistaLogin {
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
 			}
+			
+
+			
 		});
 		// añadir componentes al contenedor
 		contenedor.add(ExitField,BorderLayout.NORTH);
