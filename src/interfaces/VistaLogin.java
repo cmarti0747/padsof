@@ -12,6 +12,8 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -32,7 +34,9 @@ public class VistaLogin {
 	private JPasswordField passField;
 	private SpringLayout layout;
 	private JPanel NiaPasswordField,ExitField;
+	String nia2;
 	char[] password;
+	ControladorLogin controlador;
 	
 	public VistaLogin() {
 		// crear ventana
@@ -126,13 +130,29 @@ public class VistaLogin {
 		// asociar acciones a componentes
 		entrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, niaField.getText());
+				nia2=niaField.getText();
+				password=passField.getPassword();
+				try {
+					if(controlador.entrar()==null){
+						JOptionPane.showMessageDialog(null,"Ese usuario no existe");
+					}
+				} catch (FileNotFoundException e1) {
+					JOptionPane.showInputDialog("Se ha producido un error");
+				} catch (ClassNotFoundException e1) {
+					JOptionPane.showInputDialog("Se ha producido un error");
+				} catch (IOException e1) {
+					JOptionPane.showInputDialog("Se ha producido un error");
+				}
 			}
 		});
 		
 		salir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
+				try {
+					controlador.salir();
+				} catch (IOException e1) {
+					JOptionPane.showInputDialog("Error al desconectar");
+				}
 			}
 			
 
@@ -147,4 +167,82 @@ public class VistaLogin {
 		ventana.setSize(1020, 850);
 		ventana.setVisible(true);
 	}
+
+	public JFrame getVentana() {
+		return ventana;
+	}
+
+	public Container getContenedor() {
+		return contenedor;
+	}
+
+	public JButton getEntrar() {
+		return entrar;
+	}
+
+	public JButton getSalir() {
+		return salir;
+	}
+
+	public JLabel getNia() {
+		return nia;
+	}
+
+	public JLabel getPass() {
+		return pass;
+	}
+
+	public JLabel getIcon() {
+		return icon;
+	}
+
+	public JLabel getIcono() {
+		return icono;
+	}
+
+	public JLabel getAcademia() {
+		return academia;
+	}
+
+	public JTextField getNiaField() {
+		return niaField;
+	}
+
+	public JPasswordField getPassField() {
+		return passField;
+	}
+
+	public SpringLayout getLayout() {
+		return layout;
+	}
+
+	public JPanel getNiaPasswordField() {
+		return NiaPasswordField;
+	}
+
+	public JPanel getExitField() {
+		return ExitField;
+	}
+
+	public char[] getPassword() {
+		return password;
+	}
+	
+	public void setControlador(ControladorLogin contr){
+		this.controlador= contr;
+		
+	}
+
+	public String getNia2() {
+		return nia2;
+	}
+
+	public ControladorLogin getControlador() {
+		return controlador;
+	}
+	
+	
+	
+	
+	
 }

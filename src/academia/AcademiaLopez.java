@@ -137,20 +137,19 @@ public class AcademiaLopez implements Serializable {
 	}
 
 	/**
-	 * Función que desconecta a un usuario de la academia y guarda los cambios
+	 * Funciï¿½n que desconecta a un usuario de la academia y guarda los cambios
 	 * @return null
 	 * @throws FileNotFoundException: Error que salta si no se ha encontrado el .obj
 	 */
 	public Usuario desconectar() throws FileNotFoundException, IOException {
-		this.online=false;
+	
 		ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream("academia.obj"));
 		salida.writeObject(asignaturas);
 		salida.writeObject(alumnos);
 		salida.writeObject(matriculas);
 		salida.writeObject(profesor);
-		salida.writeBoolean(online);
 		salida.close();
-		this.usuarioOnline=null;
+		
 		System.out.println("Se ha desconectado correctamente");
 		return null;
 	}
@@ -194,7 +193,7 @@ public class AcademiaLopez implements Serializable {
 	}
 
 	/**
-	 * Funcion que añade un alumno a la lista de alumnos
+	 * Funcion que aï¿½ade un alumno a la lista de alumnos
 	 * @param a: Alumno a aniadir
 	 */
 	public void anyadirAlumno(Alumno a) {
