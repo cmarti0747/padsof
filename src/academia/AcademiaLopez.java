@@ -28,6 +28,8 @@ public class AcademiaLopez implements Serializable {
 	private List<Alumno> alumnos;
 	private static List<Matriculado> matriculas;
 	private Profesor profesor;
+	
+
 	boolean online;
 	Usuario usuarioOnline;
 	
@@ -224,6 +226,14 @@ public class AcademiaLopez implements Serializable {
 		br.close();
 		Profesor p = new Profesor(1234, "prof", "Oscar", "Delgado");
 		profesor = p;
+	}
+
+	public Usuario getUsuarioOnline() {
+		return usuarioOnline;
+	}
+	
+	public Profesor getProfesor() {
+		return profesor;
 	}
 
 	@Override

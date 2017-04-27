@@ -35,7 +35,7 @@ public class VistaLogin {
 	
 	public VistaLogin() {
 		// crear ventana
-		ventana = new JFrame("Mi GUI");
+		ventana = new JFrame("Academia");
 		// obtener contenedor, asignar layout
 		contenedor = ventana.getContentPane();
 		contenedor.setLayout(new BorderLayout());
@@ -119,7 +119,7 @@ public class VistaLogin {
 		ExitField.setBackground(new Color(255,255,255));
 		ExitField.add(icono,BorderLayout.WEST);
 		ExitField.add(academia,BorderLayout.CENTER);
-		
+		ExitField.add(salir,BorderLayout.EAST);
 	
 		
 		// asociar acciones a componentes
