@@ -3,6 +3,8 @@ package interfaces;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import javax.swing.JOptionPane;
+
 import academia.AcademiaLopez;
 import academia.Usuario;
 
@@ -18,16 +20,19 @@ public class ControladorLogin {
 		
 	}
 	
-	public Object entrar() throws FileNotFoundException, ClassNotFoundException, IOException{
+	public void entrar() throws FileNotFoundException, ClassNotFoundException, IOException{
+		char [] pas = vista.getPassword();
+		String nie = vista.getNia2();
+		if(pas.length!=0 && nie.isEmpty()==false){
+		String pass = new String(pas);
+		int nia = Integer.parseInt(nie);
 		
-		String pass = new String(vista.getPassword());
-		int nia = Integer.parseInt(vista.getNia2());
-		Usuario usuario;
-		usuario = academia.loggin(nia,pass);
-		if(usuario== null){
-			return null;
+		if(academia.loggin(nia,pass)== null){
+			JOptionPane.showMessageDialog(null,"Ese usuario no existe");
 		}
-		return nia;
+		}else{
+			JOptionPane.showMessageDialog(null,"Introduce un nia y una contrasenia");
+		}
 	}
 	
 	public void salir() throws FileNotFoundException, IOException{
