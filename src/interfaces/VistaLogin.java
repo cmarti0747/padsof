@@ -235,7 +235,10 @@ public class VistaLogin {
 		return controlador;
 	}
 	
-	
+	public void setVisibilidad(boolean visibilidad){
+		ventana.setVisible(visibilidad);
+		
+	}
 	
 	
 	

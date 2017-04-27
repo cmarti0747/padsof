@@ -12,6 +12,8 @@ public class MiGuiAplication {
 		
 		ControladorLogin controlaLogin = new ControladorLogin(vista,academia);
 		
+		
+		
 		vista.setControlador(controlaLogin);
 		//VistaHomeAlumno vista2 = new VistaHomeAlumno();
 		
